@@ -2,18 +2,18 @@ const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpx
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzodvHdBCO652XVYgojOCwK0Vkd8fbbNhq23rlaiGwXXAYtX2H1MbHf87jD-9_-D73e/exec';
 
 let atletasRegistrados = {};
-let atletasData = []; // Guardamos datos para el filtro
+let atletasData = []; // Datos originales para filtrar
 
 document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
     download: true,
     header: true,
     complete: (results) => {
-      // Filtrar solo filas con Nombre válido
+      // Guardamos datos originales (solo filas con nombre válido)
       atletasData = results.data.filter(row => row.Nombre && row.Nombre.trim() !== '');
       renderAthletes(atletasData);
 
-      // Listener para buscador - filtra por Nombre (primer columna)
+      // Buscador que filtra y muestra a medida que se escribe
       const searchInput = document.getElementById('searchInput');
       searchInput.addEventListener('input', () => {
         const filtro = searchInput.value.toLowerCase();
@@ -33,6 +33,11 @@ function renderAthletes(data) {
   const container = document.getElementById('athletesContainer');
   container.innerHTML = '';
 
+  if(data.length === 0){
+    container.innerHTML = '<p style="text-align:center; color:#666;">No se encontraron atletas.</p>';
+    return;
+  }
+
   data.forEach((row) => {
     if (!row.Nombre) return;
     const card = document.createElement('div');
@@ -48,7 +53,7 @@ function renderAthletes(data) {
 
 function solicitarClave(row) {
   const keys = Object.keys(row);
-  const claveKey = keys[keys.length - 1]; // última columna (clave)
+  const claveKey = keys[keys.length - 1]; // última columna
   const claveCorrecta = row[claveKey]?.toString().trim();
 
   const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
