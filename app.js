@@ -90,6 +90,10 @@ function openModal(row) {
 }
 
 function registrarEntrenamiento(nombre, fecha, ejercicios) {
+  const btn = document.getElementById('btnRegistrar');
+  btn.disabled = true;
+  btn.innerHTML = '⏳ Registrando... <span class="spinner"></span>';
+
   const formData = new FormData();
   formData.append('nombre', nombre);
   formData.append('fecha', fecha);
@@ -123,6 +127,10 @@ function registrarEntrenamiento(nombre, fecha, ejercicios) {
   .catch(err => {
     alert("❌ Error de conexión");
     console.error(err);
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.innerHTML = '✅ Entrenamiento culminado, avisar al coach';
   });
 }
 
@@ -156,7 +164,7 @@ function mostrarConfirmacion() {
   const modal = document.getElementById('modalConfirmacion');
   modal.classList.remove('hidden');
   modal.style.transform = 'scale(1.1)';
-  sonidoRegistro.play();
+  sonidoRegistro.play(); // ✅ Sonido al confirmar
   setTimeout(() => {
     modal.classList.add('hidden');
     modal.style.transform = 'scale(1)';
