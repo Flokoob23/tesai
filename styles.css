@@ -1,57 +1,54 @@
-/* styles.css */
 body {
   font-family: 'Poppins', sans-serif;
-  background: #fff;
   margin: 0;
   padding: 0;
   color: #333;
+  background: #fff;
 }
 
-/* Fondo de encabezado con imagen y superposición */
 .hero-header {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), url('https://i.imgur.com/VO8bLfO.jpeg');
-  background-size: cover;
-  background-position: center;
-  color: #fff;
-  padding: 4rem 1rem;
-  text-align: center;
   position: relative;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  height: 300px;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6)),
+              url('https://i.imgur.com/VO8bLfO.jpeg') center/cover no-repeat;
+  color: white;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-content {
-  max-width: 800px;
-  margin: 0 auto;
+  z-index: 2;
+  padding: 2rem;
 }
 
 .hero-header h1 {
-  font-size: 3rem;
   margin: 0;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  font-size: 3rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
 }
 
 .hero-header p {
-  font-size: 1.3rem;
-  margin: 0.5rem 0 0 0;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+  margin: 0.5rem 0 0;
+  font-size: 1.4rem;
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 }
 
 main {
-  padding: 0 2rem 2rem 2rem;
+  padding: 1rem 2rem;
 }
 
-/* Buscador */
 #searchInput {
   width: 100%;
   max-width: 400px;
   padding: 0.6rem 1rem;
   margin: 2rem auto 1.5rem auto;
   font-size: 1rem;
-  display: block;
   border: 2px solid #00BFFF;
   border-radius: 8px;
   transition: border-color 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: block;
 }
 
 #searchInput:focus {
@@ -60,7 +57,6 @@ main {
   box-shadow: 0 0 6px #FFA500;
 }
 
-/* Cards */
 .athletes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -92,7 +88,6 @@ main {
   vertical-align: middle;
 }
 
-/* Modal */
 .modal {
   position: fixed;
   top: 0;
@@ -124,7 +119,6 @@ main {
   position: relative;
   box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   user-select: text;
-  overflow-y: auto;
 }
 
 .modal-content img {
@@ -179,7 +173,6 @@ main {
   outline: none;
 }
 
-/* Botones */
 .modal-content button {
   background-color: #FFA500;
   color: white;
@@ -209,7 +202,6 @@ main {
   background-color: #45a049 !important;
 }
 
-/* Animación de carga */
 .spinner {
   border: 3px solid #f3f3f3;
   border-top: 3px solid #4CAF50;
@@ -231,7 +223,7 @@ main {
   display: none;
 }
 
-/* Scrollbar en listas */
+/* Scrollbar para modal lista ejercicios */
 .modal-content ul::-webkit-scrollbar {
   width: 7px;
 }
