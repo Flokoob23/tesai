@@ -1,9 +1,9 @@
-// app.js
-
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpxjaS0H38fGSjGe8rS6xP3yLzTpAhdDe0ZZEFgjQQm2GAVjYdEpJn8_t3Ar_J3_vDcw/pub?gid=0&single=true&output=csv';
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzodvHdBCO652XVYgojOCwK0Vkd8fbbNhq23rlaiGwXXAYtX2H1MbHf87jD-9_-D73e/exec';
 
 let atletasRegistrados = {};
+
+let sonidoRegistro;
 
 document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
@@ -87,7 +87,7 @@ function openModal(row) {
           ✅ Entrenamiento culminado, avisar al coach
         </button>`}
 
-      <button type="button" onclick="cerrarModal()" style="margin-top:1rem; background:#FF7F50; color:#fff;">
+      <button type="button" onclick="cerrarModal()" style="margin-top:1rem; background:#FFA500; color:#fff;">
         Cerrar
       </button>
     </div>
@@ -188,9 +188,7 @@ function mostrarConfirmacion() {
   }, 2300);
 }
 
-let sonidoRegistro;
 function cargarSonidoRegistro() {
   sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3');
   sonidoRegistro.load();
 }
-
