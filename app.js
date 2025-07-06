@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  crearModalConfirmacion(); // Modal flotante
-  cargarSonidoRegistro();   // Sonido ✅
+  crearModalConfirmacion();
+  cargarSonidoRegistro();
 });
 
 function renderAthletes(data) {
@@ -42,6 +42,7 @@ function openModal(row) {
     </li>
   `).join('');
 
+  // Botón separado con llamada a función por ID
   modal.innerHTML = `
     <div class="modal-content">
       <img src="${row.Foto || './assets/placeholder.jpg'}" alt="Foto de ${row.Nombre}" />
@@ -53,15 +54,20 @@ function openModal(row) {
         <button style="background-color: #FFA500; color: white; margin-top: 1rem;">Contactar por WhatsApp</button>
       </a>
 
-      <button onclick="registrarEntrenamiento('${row.Nombre}', '${fecha}', ${JSON.stringify(ejercicios)})"
-              style="background-color:green; color:white; margin-top:1rem;">
+      <button id="btnRegistrar" style="background-color:green; color:white; margin-top:1rem;">
         ✅ Entrenamiento culminado, avisar al coach
       </button>
 
       <button onclick="cerrarModal()" style="margin-top:1rem;">Cerrar</button>
     </div>
   `;
+
   modal.classList.remove('hidden');
+
+  // 💡 Acá agregamos el click real al botón
+  document.getElementById('btnRegistrar').addEventListener('click', () => {
+    registrarEntrenamiento(row.Nombre, fecha, ejercicios);
+  });
 }
 
 function cerrarModal() {
@@ -115,6 +121,7 @@ function registrarEntrenamiento(nombre, fecha, ejercicios) {
   })
   .then(res => res.text())
   .then(txt => {
+    console.log("Respuesta del script:", txt);
     if (txt.includes("OK")) {
       mostrarConfirmacion();
       cerrarModal();
@@ -129,3 +136,4 @@ function registrarEntrenamiento(nombre, fecha, ejercicios) {
     console.error(err);
   });
 }
+
