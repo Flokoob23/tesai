@@ -2,6 +2,7 @@ const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpx
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzodvHdBCO652XVYgojOCwK0Vkd8fbbNhq23rlaiGwXXAYtX2H1MbHf87jD-9_-D73e/exec';
 
 let atletasRegistrados = {};
+let atletasData = [];  // guardar datos completos para filtrar
 
 let sonidoRegistro;
 
@@ -9,11 +10,23 @@ document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
     download: true,
     header: true,
-    complete: (results) => renderAthletes(results.data)
+    complete: (results) => {
+      atletasData = results.data.filter(row => row.Nombre);
+      renderAthletes(atletasData);
+    }
   });
 
   crearModalConfirmacion();
   cargarSonidoRegistro();
+
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', () => {
+    const filtro = searchInput.value.toLowerCase();
+    const filtrados = atletasData.filter(atleta =>
+      atleta.Nombre.toLowerCase().includes(filtro)
+    );
+    renderAthletes(filtrados);
+  });
 });
 
 function renderAthletes(data) {
@@ -181,7 +194,9 @@ function mostrarConfirmacion() {
   const modal = document.getElementById('modalConfirmacion');
   modal.classList.remove('hidden');
   modal.style.transform = 'scale(1.1)';
-  sonidoRegistro.play();
+  sonidoRegistro.play().catch(() => {
+    // En caso de bloqueo por autoplay, se ignora el error
+  });
   setTimeout(() => {
     modal.classList.add('hidden');
     modal.style.transform = 'scale(1)';
@@ -189,6 +204,6 @@ function mostrarConfirmacion() {
 }
 
 function cargarSonidoRegistro() {
-  sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3');
+  sonidoRegistro = new Audio('https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg'); // sonido tipo "pinnn"
   sonidoRegistro.load();
 }
