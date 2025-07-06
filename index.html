@@ -16,17 +16,15 @@
 
   <main>
     <input
-      type="search"
+      type="text"
       id="searchInput"
       placeholder="Buscar atleta..."
-      aria-label="Buscar atleta"
-      autocomplete="off"
-      spellcheck="false"
+      style="margin: 1rem auto; padding: 0.5rem; width: 90%; max-width: 400px; font-size: 1rem; display: block; border-radius: 5px; border: 1px solid #ccc;"
     />
-    <div id="athletesContainer" class="athletes-grid" role="list"></div>
+    <div id="athletesContainer" class="athletes-grid"></div>
   </main>
 
-  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div>
+  <div id="modal" class="modal hidden"></div>
 
   <script src="app.js"></script>
 </body>
