@@ -19,15 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderAthletes(data) {
   const container = document.getElementById('athletesContainer');
   container.innerHTML = '';
+
   data.forEach((row) => {
     if (!row.Nombre) return;
     const card = document.createElement('div');
     card.className = 'athlete-card';
     card.id = `card-${row.Nombre.replace(/\s+/g, '-')}`;
     card.innerHTML = `<h3>${row.Nombre}</h3>`;
-    card.addEventListener('click', () => openModal(row));
+    card.addEventListener('click', () => {
+      solicitarClave(row);
+    });
     container.appendChild(card);
   });
+}
+
+function solicitarClave(row) {
+  const claveCorrecta = row.Clave?.trim();
+  const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
+
+  if (claveIngresada && claveIngresada.trim() === claveCorrecta) {
+    openModal(row);
+  } else {
+    alert('❌ Clave incorrecta. No podés acceder al entrenamiento.');
+  }
 }
 
 function openModal(row) {
@@ -93,7 +107,6 @@ function registrarEntrenamiento(nombre, fecha, ejercicios) {
       mostrarConfirmacion();
       cerrarModal();
 
-      // ✅ Agrega ícono de check en la tarjeta
       const card = document.getElementById(`card-${nombre.replace(/\s+/g, '-')}`);
       if (card && !card.querySelector('.check-icon')) {
         const check = document.createElement('span');
