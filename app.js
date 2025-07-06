@@ -41,8 +41,8 @@ function openModal(row) {
       <h2>${row.Nombre}</h2>
       <p><strong>Fecha:</strong> ${fecha}</p>
       <ul>${entrenamientoHtml}</ul>
-      <a href="https://api.whatsapp.com/send?text=Hola Coach, tengo dudas con el entrenamiento de hoy (${fecha}). Mi nombre es ${row.Nombre}" target="_blank">
-        <button>Contactar por WhatsApp</button>
+      <a href="https://api.whatsapp.com/send?phone=543584328924&text=Hola Coach, tengo dudas con el entrenamiento de hoy (${fecha}). Mi nombre es ${row.Nombre}" target="_blank">
+        <button>CONTACTAR CON EL COACH</button>
       </a>
       <button onclick="cerrarModal()">Cerrar</button>
     </div>
