@@ -35,7 +35,7 @@ function renderAthletes(data) {
 
 function solicitarClave(row) {
   // Buscar la clave sin importar mayúsculas/minúsculas en el encabezado
-  const claveCorrecta = row['CLAVE'] || row['Clave'] || row['clave'];
+  const claveCorrecta = row['CLAVE'] || row['CLAVE'] || row['CLAVE'];
   const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
 
   if (claveIngresada && claveIngresada.trim() === claveCorrecta?.trim()) {
