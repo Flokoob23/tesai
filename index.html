@@ -2,81 +2,71 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bienvenidos a TESAI</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TESAI</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(to right, #FFA500, #00BFFF);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
       color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      text-align: center;
     }
 
-    h1 {
-      font-size: 3.5rem;
-      text-transform: uppercase;
-      background: linear-gradient(45deg, #FFA500, #00BFFF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      animation: flotar 5s ease-in-out infinite;
+    .logo-img {
+      max-width: 300px;
+      width: 80%;
+      margin-bottom: 1rem;
+      filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4));
     }
 
-    p {
+    .phrase {
       font-size: 1.2rem;
-      max-width: 500px;
-      margin: 1rem 2rem;
+      margin: 0.5rem 0 2rem;
+      font-weight: 500;
+      text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
     }
 
     .btn {
-      background-color: #fff;
+      background-color: #ffffff;
       color: #FFA500;
-      padding: 0.8rem 2rem;
-      font-size: 1rem;
-      font-weight: bold;
       border: none;
+      padding: 0.8rem 2rem;
       border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      margin-top: 2rem;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .btn:hover {
-      background-color: #FFA500;
-      color: white;
+      background-color: #FFE0B3;
       transform: scale(1.05);
     }
 
-    @keyframes flotar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
     @media (max-width: 600px) {
-      h1 {
-        font-size: 2.2rem;
+      .phrase {
+        font-size: 1rem;
+        padding: 0 1rem;
       }
 
-      p {
+      .btn {
         font-size: 1rem;
+        padding: 0.6rem 1.5rem;
       }
     }
   </style>
 </head>
 <body>
-
-  <h1>BIENVENIDOS A TESAI</h1>
-  <p>"No se trata solo de correr, se trata de superarse. Cada día, un paso más cerca de tu mejor versión."</p>
+  <img src="https://i.imgur.com/FIFkYmg.png" alt="TESAI Logo" class="logo-img" />
+  <p class="phrase">Preparación física y mental para llegar más lejos.</p>
   <button class="btn" onclick="window.location.href='entrenamientos.html'">ENTRENAMIENTOS</button>
-
 </body>
 </html>
