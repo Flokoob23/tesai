@@ -3,69 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TESAI</title>
+  <title>TESAI – Entrenamientos</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background-color: #3776BC; /* Nuevo fondo */
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-      text-align: center;
+      background-color: #3776BC;
     }
 
-    .logo-img {
+    header {
+      background-color: #3776BC;
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #fff;
+    }
+
+    header img {
       max-width: 300px;
-      width: 80%;
-      margin-bottom: 1rem;
+      width: 90%;
+      margin-bottom: 0.5rem;
       filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4));
     }
 
-    .phrase {
+    header p {
       font-size: 1.2rem;
-      margin: 0.5rem 0 2rem;
+      margin: 0;
       font-weight: 500;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
-    }
-
-    .btn {
-      background-color: #FFA500;
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      border-radius: 30px;
-      font-size: 1.1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: transform 0.3s ease, background-color 0.3s ease;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-
-    .btn:hover {
-      background-color: #e69500;
-      transform: scale(1.05);
-    }
-
-    @media (max-width: 600px) {
-      .phrase {
-        font-size: 1rem;
-        padding: 0 1rem;
-      }
-      .btn {
-        font-size: 1rem;
-        padding: 0.6rem 1.5rem;
-      }
+      color: #fff;
     }
   </style>
 </head>
 <body>
-  <img src="https://i.imgur.com/FIFkYmg.png" alt="TESAI Logo" class="logo-img" />
-  <p class="phrase">Preparación física y mental para llegar más lejos.</p>
-  <button class="btn" onclick="window.location.href='entrenamientos.html'">ENTRENAMIENTOS</button>
+  <header>
+    <img src="https://i.imgur.com/FIFkYmg.png" alt="TESAI" />
+    <p>Preparación física y acompañamiento atlético</p>
+  </header>
+
+  <main>
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Buscar atleta..."
+    />
+    <div id="athletesContainer" class="athletes-grid"></div>
+  </main>
+
+  <div id="modal" class="modal hidden"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>
