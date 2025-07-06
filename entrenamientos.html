@@ -10,20 +10,33 @@
   <style>
     body {
       background-color: #3776BC;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #fff;
     }
 
     header {
       background-color: #3776BC;
       text-align: center;
       padding: 2rem 1rem;
-      color: #fff;
     }
 
     header img {
-      max-width: 300px;
-      width: 90%;
-      margin-bottom: 0.5rem;
+      max-width: 400px;
+      width: 95%;
+      margin-bottom: 1rem;
       filter: drop-shadow(0 5px 10px rgba(0,0,0,0.4));
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeSlideIn 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     header p {
@@ -32,11 +45,44 @@
       font-weight: 500;
       color: #fff;
     }
+
+    main {
+      padding: 1rem 2rem;
+    }
+
+    #searchInput {
+      width: 100%;
+      max-width: 400px;
+      padding: 0.6rem 1rem;
+      margin: 1.5rem auto;
+      font-size: 1rem;
+      border: 2px solid #fff;
+      border-radius: 8px;
+      display: block;
+      transition: border-color 0.3s ease;
+    }
+
+    #searchInput:focus {
+      outline: none;
+      border-color: #FFA500;
+      box-shadow: 0 0 6px #FFA500;
+    }
+
+    .athletes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .modal.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://i.imgur.com/FIFkYmg.png" alt="TESAI" />
+    <img src="https://i.imgur.com/FIFkYmg.png" alt="TESAI Logo" />
+    <p>Preparación física y acompañamiento atlético</p>
   </header>
 
   <main>
