@@ -34,10 +34,11 @@ function renderAthletes(data) {
 }
 
 function solicitarClave(row) {
-  const claveCorrecta = row.Clave?.trim();
+  // Buscar la clave sin importar mayúsculas/minúsculas en el encabezado
+  const claveCorrecta = row['CLAVE'] || row['Clave'] || row['clave'];
   const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
 
-  if (claveIngresada && claveIngresada.trim() === claveCorrecta) {
+  if (claveIngresada && claveIngresada.trim() === claveCorrecta?.trim()) {
     openModal(row);
   } else {
     alert('❌ Clave incorrecta. No podés acceder al entrenamiento.');
