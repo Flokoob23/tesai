@@ -79,7 +79,7 @@ function openModal(row) {
     <div class="modal-content">
       <img src="${row.Foto || './assets/placeholder.jpg'}" alt="Foto de ${nombre}" />
       <h2>${nombre}</h2>
-      <p><strong>Fecha:</strong> ${fecha}</p>
+      <p><strong>ACTIVIDAD DEL DIA:</strong> ${fecha}</p>
       <ul>${ejerciciosHtml}</ul>
 
       <a href="https://api.whatsapp.com/send?phone=543584328924&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + nombre)}" target="_blank">
