@@ -34,11 +34,19 @@ function renderAthletes(data) {
 }
 
 function solicitarClave(row) {
-  // Buscar la clave sin importar mayúsculas/minúsculas en el encabezado
-  const claveCorrecta = row['CLAVE'] || row['CLAVE'] || row['CLAVE'];
+  // ✅ Busca el campo CLAVE sin importar espacios o mayúsculas
+  let claveCorrecta = null;
+
+  for (let key in row) {
+    if (key.trim().toLowerCase() === 'clave') {
+      claveCorrecta = row[key];
+      break;
+    }
+  }
+
   const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
 
-  if (claveIngresada && claveIngresada.trim() === claveCorrecta?.trim()) {
+  if (claveIngresada && claveCorrecta && claveIngresada.trim() === claveCorrecta.trim()) {
     openModal(row);
   } else {
     alert('❌ Clave incorrecta. No podés acceder al entrenamiento.');
@@ -165,7 +173,7 @@ function mostrarConfirmacion() {
   const modal = document.getElementById('modalConfirmacion');
   modal.classList.remove('hidden');
   modal.style.transform = 'scale(1.1)';
-  sonidoRegistro.play(); // ✅ Sonido al confirmar
+  sonidoRegistro.play();
   setTimeout(() => {
     modal.classList.add('hidden');
     modal.style.transform = 'scale(1)';
