@@ -1,5 +1,5 @@
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpxjaS0H38fGSjGe8rS6xP3yLzTpAhdDe0ZZEFgjQQm2GAVjYdEpJn8_t3Ar_J3_vDcw/pub?gid=0&single=true&output=csv';
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbwBdJvJjhdKUuJ2epFvN6JQ3WIf1U4YyIy19WpkfmaE5L44d7qpOCDWkYxmwlGFzJIZ6A/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbwkhk4_8_g6j7WRuxagPH2u8gWY1nrMLUqvbP7vT-6Ftj2t7pdDZ6Q5BxBLM010q6jeug/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
