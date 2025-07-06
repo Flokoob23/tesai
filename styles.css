@@ -1,86 +1,51 @@
 /* styles.css */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
-
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  background: #fff;
   margin: 0;
   padding: 0;
-  color: #e0e0e0;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  color: #333;
 }
 
 header {
-  background: #FF7F50; /* coral/naranja suave */
+  background: #FFA500;
   text-align: center;
   padding: 2rem 1rem;
   color: #fff;
-  box-shadow: 0 4px 12px rgba(255,127,80,0.5);
-  user-select: none;
 }
 
 header h1 {
   margin: 0;
-  font-size: 3rem;
-  font-weight: 700;
-  text-shadow:
-    2px 2px 5px rgba(0,0,0,0.3),
-    0 0 10px #ff7f50;
-  letter-spacing: 2px;
-  /* Sutil efecto 3D */
-  transform-style: preserve-3d;
-  perspective: 600px;
-  animation: floatTitle 4s ease-in-out infinite;
-}
-
-@keyframes floatTitle {
-  0%, 100% { transform: translateZ(0) translateY(0); }
-  50% { transform: translateZ(10px) translateY(-5px); }
+  font-size: 2.5rem;
 }
 
 header p {
   margin: 0;
-  font-size: 1.25rem;
-  font-weight: 300;
-  letter-spacing: 1px;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-}
-
-main {
-  flex-grow: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+  font-size: 1.2rem;
+  color: #fff;
 }
 
 .athletes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
 }
 
 .athlete-card {
-  background: #1e3c72; /* azul oscuro */
-  padding: 1.5rem 1rem;
-  border-radius: 12px;
-  color: #fff;
+  background: #00BFFF;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: white;
   text-align: center;
   cursor: pointer;
-  box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  user-select: none;
-  font-weight: 600;
-  font-size: 1.2rem;
-  position: relative;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
 
 .athlete-card:hover,
 .athlete-card:focus {
-  transform: translateY(-6px);
-  box-shadow: 0 15px 25px rgba(255,127,80,0.6);
+  transform: scale(1.05);
   outline: none;
 }
 
@@ -98,11 +63,11 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(15, 32, 39, 0.85);
+  background: rgba(0,0,0,0.7);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
+  z-index: 999;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -114,67 +79,47 @@ main {
 }
 
 .modal-content {
-  background: #142d4c;
-  color: #ddd;
-  padding: 2rem 2.5rem;
-  border-radius: 16px;
+  background: white;
+  color: #333;
+  padding: 2rem;
+  border-radius: 1rem;
   width: 90%;
-  max-width: 540px;
+  max-width: 500px;
   position: relative;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.7);
-  animation: slideInModal 0.4s ease forwards;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   user-select: text;
 }
 
-@keyframes slideInModal {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 .modal-content img {
-  width: 110px;
-  height: 110px;
-  object-fit: cover;
+  width: 100px;
   border-radius: 50%;
-  margin-bottom: 1.2rem;
-  border: 3px solid #FF7F50;
-  box-shadow: 0 0 15px #FF7F50;
-  user-select: none;
+  margin-bottom: 1rem;
 }
 
 .modal-content h2 {
-  margin: 0 0 0.3rem 0;
+  margin-top: 0;
   font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: 0.05em;
+  font-size: 1.8rem;
 }
 
 .modal-content p {
-  margin: 0 0 1rem 0;
-  font-weight: 400;
   font-size: 1.1rem;
-  color: #eee;
+  margin-bottom: 1rem;
 }
 
 .modal-content ul {
   list-style: none;
   padding-left: 0;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 1rem 0;
   max-height: 200px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #FF7F50 #2c5364;
+  scrollbar-color: #FFA500 #f0f0f0;
 }
 
 .modal-content ul li {
   padding: 8px 6px;
-  border-bottom: 1px solid #264d73;
+  border-bottom: 1px solid #f0f0f0;
   font-weight: 500;
   display: flex;
   justify-content: space-between;
@@ -184,26 +129,26 @@ main {
 .modal-content ul li button {
   background: transparent;
   border: none;
-  color: #FF7F50;
+  color: #FFA500;
   font-size: 1.2rem;
   cursor: pointer;
-  transition: color 0.25s;
+  transition: color 0.2s;
   padding: 0;
 }
 
 .modal-content ul li button:hover,
 .modal-content ul li button:focus {
-  color: #FFA94D;
+  color: #ff8c00;
   outline: none;
 }
 
 .modal-content button {
-  background-color: #FF7F50;
+  background-color: #FFA500;
   color: white;
   border: none;
   padding: 0.6rem 1.2rem;
   margin-top: 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   font-size: 1.1rem;
@@ -213,7 +158,7 @@ main {
 
 .modal-content button:hover,
 .modal-content button:focus {
-  background-color: #e5672e;
+  background-color: #e69500;
   outline: none;
 }
 
@@ -252,11 +197,10 @@ main {
   width: 7px;
 }
 .modal-content ul::-webkit-scrollbar-track {
-  background: #2c5364;
+  background: #f0f0f0;
   border-radius: 10px;
 }
 .modal-content ul::-webkit-scrollbar-thumb {
-  background: #FF7F50;
+  background: #FFA500;
   border-radius: 10px;
 }
-
