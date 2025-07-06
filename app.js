@@ -2,41 +2,35 @@ const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpx
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbzodvHdBCO652XVYgojOCwK0Vkd8fbbNhq23rlaiGwXXAYtX2H1MbHf87jD-9_-D73e/exec';
 
 let atletasRegistrados = {};
-let atletasData = []; // Datos originales para filtrar
+let atletasData = []; // guardamos toda la data para filtrar
 
 document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
     download: true,
     header: true,
-    complete: (results) => {
-      // Guardamos datos originales (solo filas con nombre válido)
-      atletasData = results.data.filter(row => row.Nombre && row.Nombre.trim() !== '');
+    complete: function(results) {
+      atletasData = results.data.filter(row => row.Nombre); // guardamos solo filas con nombre
       renderAthletes(atletasData);
-
-      // Buscador que filtra y muestra a medida que se escribe
-      const searchInput = document.getElementById('searchInput');
-      searchInput.addEventListener('input', () => {
-        const filtro = searchInput.value.toLowerCase();
-        const filtrados = atletasData.filter(atleta =>
-          atleta.Nombre.toLowerCase().includes(filtro)
-        );
-        renderAthletes(filtrados);
-      });
     }
   });
 
   crearModalConfirmacion();
   cargarSonidoRegistro();
+
+  // Agregar evento input al buscador
+  const buscador = document.getElementById('searchInput');
+  buscador.addEventListener('input', () => {
+    const texto = buscador.value.toLowerCase().trim();
+    const filtrados = atletasData.filter(row => 
+      row.Nombre.toLowerCase().includes(texto)
+    );
+    renderAthletes(filtrados);
+  });
 });
 
 function renderAthletes(data) {
   const container = document.getElementById('athletesContainer');
   container.innerHTML = '';
-
-  if(data.length === 0){
-    container.innerHTML = '<p style="text-align:center; color:#666;">No se encontraron atletas.</p>';
-    return;
-  }
 
   data.forEach((row) => {
     if (!row.Nombre) return;
