@@ -1,5 +1,7 @@
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpxjaS0H38fGSjGe8rS6xP3yLzTpAhdDe0ZZEFgjQQm2GAVjYdEpJn8_t3Ar_J3_vDcw/pub?gid=0&single=true&output=csv';
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbwkhk4_8_g6j7WRuxagPH2u8gWY1nrMLUqvbP7vT-6Ftj2t7pdDZ6Q5BxBLM010q6jeug/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbzc6O570sTR74TuskwhNkNcXmx9fKddks_6_fxRBHorvZkzAlRTvLHyq1RPEPmdEq0zvQ/exec';
+
+let atletasRegistrados = {};
 
 document.addEventListener('DOMContentLoaded', () => {
   Papa.parse(sheetUrl, {
@@ -21,6 +23,7 @@ function renderAthletes(data) {
     if (!row.Nombre) return;
     const card = document.createElement('div');
     card.className = 'athlete-card';
+    card.id = `card-${row.Nombre.replace(/\s+/g, '-')}`;
     card.innerHTML = `<h3>${row.Nombre}</h3>`;
     card.addEventListener('click', () => openModal(row));
     container.appendChild(card);
@@ -30,11 +33,10 @@ function renderAthletes(data) {
 function openModal(row) {
   const modal = document.getElementById('modal');
   const fecha = row.Fecha || new Date().toLocaleDateString();
-
+  const nombre = row.Nombre;
   const ejercicios = Object.keys(row)
     .filter(k => k.toLowerCase().includes('ejercicio') && row[k])
     .map(k => row[k]);
-
   const ejerciciosHtml = ejercicios.map(e => `
     <li>
       ${e}
@@ -42,21 +44,23 @@ function openModal(row) {
     </li>
   `).join('');
 
-  // Botón separado con llamada a función por ID
+  const yaRegistrado = atletasRegistrados[nombre + fecha];
+
   modal.innerHTML = `
     <div class="modal-content">
-      <img src="${row.Foto || './assets/placeholder.jpg'}" alt="Foto de ${row.Nombre}" />
-      <h2>${row.Nombre}</h2>
+      <img src="${row.Foto || './assets/placeholder.jpg'}" alt="Foto de ${nombre}" />
+      <h2>${nombre}</h2>
       <p><strong>Fecha:</strong> ${fecha}</p>
       <ul>${ejerciciosHtml}</ul>
 
-      <a href="https://api.whatsapp.com/send?phone=543584328924&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + row.Nombre)}" target="_blank">
+      <a href="https://api.whatsapp.com/send?phone=543584328924&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + nombre)}" target="_blank">
         <button style="background-color: #FFA500; color: white; margin-top: 1rem;">Contactar por WhatsApp</button>
       </a>
 
-      <button id="btnRegistrar" style="background-color:green; color:white; margin-top:1rem;">
-        ✅ Entrenamiento culminado, avisar al coach
-      </button>
+      ${yaRegistrado ? '<p style="color:green;">✔️ Ya registrado</p>' : `
+        <button id="btnRegistrar" style="background-color:green; color:white; margin-top:1rem;">
+          ✅ Entrenamiento culminado, avisar al coach
+        </button>`}
 
       <button onclick="cerrarModal()" style="margin-top:1rem;">Cerrar</button>
     </div>
@@ -64,9 +68,48 @@ function openModal(row) {
 
   modal.classList.remove('hidden');
 
-  // 💡 Acá agregamos el click real al botón
-  document.getElementById('btnRegistrar').addEventListener('click', () => {
-    registrarEntrenamiento(row.Nombre, fecha, ejercicios);
+  if (!yaRegistrado) {
+    document.getElementById('btnRegistrar').addEventListener('click', () => {
+      registrarEntrenamiento(nombre, fecha, ejercicios.join(', '));
+    });
+  }
+}
+
+function registrarEntrenamiento(nombre, fecha, ejercicios) {
+  const formData = new FormData();
+  formData.append('nombre', nombre);
+  formData.append('fecha', fecha);
+  formData.append('ejercicios', ejercicios);
+
+  fetch(scriptUrl, {
+    method: "POST",
+    body: formData
+  })
+  .then(res => res.text())
+  .then(txt => {
+    console.log("Respuesta del script:", txt);
+    if (txt.includes("OK")) {
+      atletasRegistrados[nombre + fecha] = true;
+      mostrarConfirmacion();
+      cerrarModal();
+
+      // ✅ Agrega ícono de check en la tarjeta
+      const card = document.getElementById(`card-${nombre.replace(/\s+/g, '-')}`);
+      if (card && !card.querySelector('.check-icon')) {
+        const check = document.createElement('span');
+        check.className = 'check-icon';
+        check.innerHTML = ' ✔️';
+        card.querySelector('h3').appendChild(check);
+      }
+    } else if (txt.includes("DUPLICADO")) {
+      alert("❗Ya registraste este entrenamiento.");
+    } else {
+      alert("❌ Error inesperado: " + txt);
+    }
+  })
+  .catch(err => {
+    alert("❌ Error de conexión");
+    console.error(err);
   });
 }
 
@@ -109,31 +152,6 @@ function mostrarConfirmacion() {
 
 let sonidoRegistro;
 function cargarSonidoRegistro() {
-  sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3'); // Sonido check
+  sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3');
   sonidoRegistro.load();
 }
-
-function registrarEntrenamiento(nombre, fecha, ejercicios) {
-  fetch(scriptUrl, {
-    method: "POST",
-    body: JSON.stringify({ nombre, fecha, ejercicios }),
-    headers: { "Content-Type": "application/json" }
-  })
-  .then(res => res.text())
-  .then(txt => {
-    console.log("Respuesta del script:", txt);
-    if (txt.includes("OK")) {
-      mostrarConfirmacion();
-      cerrarModal();
-    } else if (txt.includes("DUPLICADO")) {
-      alert("❗Ya registraste este entrenamiento.");
-    } else {
-      alert("❌ Error inesperado: " + txt);
-    }
-  })
-  .catch(err => {
-    alert("❌ Error de conexión");
-    console.error(err);
-  });
-}
-
