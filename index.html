@@ -9,9 +9,11 @@
   <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
-  <header>
-    <h1>TESAI</h1>
-    <p>Preparación física y acompañamiento atlético</p>
+  <header class="hero-header">
+    <div class="header-content">
+      <h1>TESAI</h1>
+      <p>Preparación física y acompañamiento atlético</p>
+    </div>
   </header>
 
   <main>
@@ -19,7 +21,6 @@
       type="text"
       id="searchInput"
       placeholder="Buscar atleta..."
-      style="margin: 1rem auto; padding: 0.5rem; width: 90%; max-width: 400px; font-size: 1rem; display: block; border-radius: 5px; border: 1px solid #ccc;"
     />
     <div id="athletesContainer" class="athletes-grid"></div>
   </main>
