@@ -125,26 +125,22 @@ function registrarEntrenamiento(nombre, fecha, ejercicios) {
       }
     } else if (txt.includes("DUPLICADO")) {
       alert("❗Ya registraste este entrenamiento.");
-      btn.disabled = false;
-      btn.innerHTML = '✅ Entrenamiento culminado, avisar al coach';
     } else {
       alert("❌ Error inesperado: " + txt);
-      btn.disabled = false;
-      btn.innerHTML = '✅ Entrenamiento culminado, avisar al coach';
     }
   })
   .catch(err => {
     alert("❌ Error de conexión");
     console.error(err);
+  })
+  .finally(() => {
     btn.disabled = false;
     btn.innerHTML = '✅ Entrenamiento culminado, avisar al coach';
   });
 }
 
 function cerrarModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.add('hidden');
-  modal.innerHTML = '';
+  document.getElementById('modal').classList.add('hidden');
 }
 
 function buscarEjercicio(ejercicio) {
@@ -153,8 +149,9 @@ function buscarEjercicio(ejercicio) {
 }
 
 function crearModalConfirmacion() {
-  const modalConfirm = document.getElementById('modalConfirmacion');
-  modalConfirm.classList.add('hidden');
+  const modalConfirm = document.createElement('div');
+  modalConfirm.id = 'modalConfirmacion';
+  modalConfirm.className = 'hidden';
   modalConfirm.style.position = 'fixed';
   modalConfirm.style.top = '20px';
   modalConfirm.style.right = '20px';
@@ -165,6 +162,7 @@ function crearModalConfirmacion() {
   modalConfirm.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
   modalConfirm.style.fontWeight = 'bold';
   modalConfirm.innerHTML = '✅ Entrenamiento registrado';
+  document.body.appendChild(modalConfirm);
 }
 
 function mostrarConfirmacion() {
@@ -183,3 +181,4 @@ function cargarSonidoRegistro() {
   sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3');
   sonidoRegistro.load();
 }
+
