@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>TESAI – Entrenamientos</title>
   <link rel="stylesheet" href="styles.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
+  <link rel="icon" href="https://img.icons8.com/ios-filled/50/FF7F50/running.png" />
 </head>
 <body>
   <header>
@@ -15,10 +16,10 @@
   </header>
 
   <main>
-    <div id="athletesContainer" class="athletes-grid"></div>
+    <div id="athletesContainer" class="athletes-grid" role="list"></div>
   </main>
 
-  <div id="modal" class="modal hidden"></div>
+  <div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1"></div>
 
   <script src="app.js"></script>
 </body>
