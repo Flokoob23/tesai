@@ -1,7 +1,4 @@
-// URL del CSV de Google Sheets
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpxjaS0H38fGSjGe8rS6xP3yLzTpAhdDe0ZZEFgjQQm2GAVjYdEpJn8_t3Ar_J3_vDcw/pub?gid=0&single=true&output=csv';
-
-// URL de tu Google Apps Script para registrar entrenamientos
 const scriptUrl = 'https://script.google.com/macros/s/AKfycbybFdeB13NvnFJRx15ctBwhrE36mTKyyMTLEPoKVYNiCVck_xdy_DZ58cAyPw6an9-wwg/exec';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -13,7 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  crearModalConfirmacion(); // Agrega el modal de feedback al DOM
+  crearModalConfirmacion(); // Modal flotante
+  cargarSonidoRegistro();   // Sonido ✅
 });
 
 function renderAthletes(data) {
@@ -51,7 +49,7 @@ function openModal(row) {
       <p><strong>Fecha:</strong> ${fecha}</p>
       <ul>${ejerciciosHtml}</ul>
 
-      <a href="https://api.whatsapp.com/send?phone=543584328924&text=Hola Coach, tengo dudas con el entrenamiento de hoy (${fecha}). Mi nombre es ${row.Nombre}" target="_blank">
+      <a href="https://api.whatsapp.com/send?phone=543584328924&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + row.Nombre)}" target="_blank">
         <button style="background-color: #FFA500; color: white; margin-top: 1rem;">Contactar por WhatsApp</button>
       </a>
 
@@ -75,7 +73,6 @@ function buscarEjercicio(ejercicio) {
   window.open(url, '_blank');
 }
 
-// Modal de confirmación flotante
 function crearModalConfirmacion() {
   const modalConfirm = document.createElement('div');
   modalConfirm.id = 'modalConfirmacion';
@@ -88,37 +85,47 @@ function crearModalConfirmacion() {
   modalConfirm.style.padding = '1rem';
   modalConfirm.style.borderRadius = '10px';
   modalConfirm.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
-  modalConfirm.innerText = '✅ Entrenamiento registrado';
+  modalConfirm.style.fontWeight = 'bold';
+  modalConfirm.innerHTML = '✅ Entrenamiento registrado';
   document.body.appendChild(modalConfirm);
 }
 
 function mostrarConfirmacion() {
   const modal = document.getElementById('modalConfirmacion');
   modal.classList.remove('hidden');
+  modal.style.transform = 'scale(1.1)';
+  sonidoRegistro.play();
   setTimeout(() => {
     modal.classList.add('hidden');
+    modal.style.transform = 'scale(1)';
   }, 2500);
+}
+
+let sonidoRegistro;
+function cargarSonidoRegistro() {
+  sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3'); // Sonido check
+  sonidoRegistro.load();
 }
 
 function registrarEntrenamiento(nombre, fecha, ejercicios) {
   fetch(scriptUrl, {
     method: "POST",
     body: JSON.stringify({ nombre, fecha, ejercicios }),
-    headers: {
-      "Content-Type": "application/json"
-    }
+    headers: { "Content-Type": "application/json" }
   })
   .then(res => res.text())
   .then(txt => {
     if (txt.includes("OK")) {
       mostrarConfirmacion();
       cerrarModal();
+    } else if (txt.includes("DUPLICADO")) {
+      alert("❗Ya registraste este entrenamiento.");
     } else {
-      alert("❌ Error al registrar: " + txt);
+      alert("❌ Error inesperado: " + txt);
     }
   })
   .catch(err => {
-    alert("❌ Error al conectar con el servidor");
+    alert("❌ Error de conexión");
     console.error(err);
   });
 }
