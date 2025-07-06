@@ -29,21 +29,32 @@ main {
   padding: 0 2rem 2rem 2rem;
 }
 
+/* Buscador estilizado profesional naranja */
 #searchInput {
   width: 100%;
   max-width: 400px;
-  padding: 0.6rem 1rem;
+  padding: 0.75rem 1.5rem;
   margin-bottom: 1.5rem;
-  font-size: 1rem;
-  border: 2px solid #00BFFF;
-  border-radius: 8px;
-  transition: border-color 0.3s ease;
+  font-size: 1.1rem;
+  border: 2px solid #FFA500;
+  border-radius: 50px;
+  box-shadow: 0 2px 6px rgba(255, 165, 0, 0.4);
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#searchInput::placeholder {
+  color: #ffbb66;
+  font-weight: 500;
 }
 
 #searchInput:focus {
-  outline: none;
-  border-color: #FFA500;
-  box-shadow: 0 0 6px #FFA500;
+  border-color: #ff8c00;
+  box-shadow: 0 0 10px 3px rgba(255, 140, 0, 0.7);
 }
 
 .athletes-grid {
