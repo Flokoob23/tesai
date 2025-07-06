@@ -3,24 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TESAI - Preparación física y acompañamiento atlético</title>
+  <title>TESAI – Entrenamientos</title>
   <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
 </head>
 <body>
+  <header>
+    <h1>TESAI</h1>
+    <p>Preparación física y acompañamiento atlético</p>
+  </header>
 
-  <h1 id="title">TESAI</h1>
-  <p style="text-align:center; color:#1976d2; margin-top:-10px; font-weight:bold;">
-    Preparación física y acompañamiento atlético
-  </p>
+  <main>
+    <div id="athletesContainer" class="athletes-grid"></div>
+  </main>
 
-  <div id="athletesContainer"></div>
-
-  <div id="modal" class="hidden"></div>
-
-  <div class="runner"></div>
-
-  <div id="modalConfirmacion" class="hidden"></div>
+  <div id="modal" class="modal hidden"></div>
 
   <script src="app.js"></script>
 </body>
