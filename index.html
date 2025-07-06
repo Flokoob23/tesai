@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bienvenidos a TESAI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #FFA500, #00BFFF);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      text-transform: uppercase;
+      background: linear-gradient(45deg, #FFA500, #00BFFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      animation: flotar 5s ease-in-out infinite;
+    }
+
+    p {
+      font-size: 1.2rem;
+      max-width: 500px;
+      margin: 1rem 2rem;
+    }
+
+    .btn {
+      background-color: #fff;
+      color: #FFA500;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-top: 2rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    .btn:hover {
+      background-color: #FFA500;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    @keyframes flotar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.2rem;
+      }
+
+      p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>BIENVENIDOS A TESAI</h1>
+  <p>"No se trata solo de correr, se trata de superarse. Cada día, un paso más cerca de tu mejor versión."</p>
+  <button class="btn" onclick="window.location.href='entrenamientos.html'">ENTRENAMIENTOS</button>
+
+</body>
+</html>
