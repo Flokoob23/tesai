@@ -1,5 +1,5 @@
 const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQxkxBdNKWZIpxjaS0H38fGSjGe8rS6xP3yLzTpAhdDe0ZZEFgjQQm2GAVjYdEpJn8_t3Ar_J3_vDcw/pub?gid=0&single=true&output=csv';
-const scriptUrl = 'https://script.google.com/macros/s/AKfycbybGcV2I1R95t6NbO9lWBRYp7vfB8FKIHM5TPZIsJsBFUkLoB2_D99hDCcRezdTslp71g/exec';
+const scriptUrl = 'https://script.google.com/macros/s/AKfycbxqKCvLnAjjrXBJ1ggC9htpSGLF-4uEQbl2IGiy72zazN_tLtzGD-Exn1LBz5jXOz7v/exec';
 
 let atletasRegistrados = {};
 
