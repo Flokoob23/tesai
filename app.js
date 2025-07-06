@@ -34,19 +34,15 @@ function renderAthletes(data) {
 }
 
 function solicitarClave(row) {
-  // ✅ Busca el campo CLAVE sin importar espacios o mayúsculas
-  let claveCorrecta = null;
+  const keys = Object.keys(row);
+  const claveKey = keys[keys.length - 1]; // última columna
+  const claveCorrecta = row[claveKey]?.toString().trim();
 
-  for (let key in row) {
-    if (key.trim().toLowerCase() === 'clave') {
-      claveCorrecta = row[key];
-      break;
-    }
-  }
+  console.log('Clave correcta detectada:', claveCorrecta); // Para debug, podés quitarlo luego
 
   const claveIngresada = prompt(`🔒 Ingresá tu clave para acceder a tu entrenamiento, ${row.Nombre}:`);
 
-  if (claveIngresada && claveCorrecta && claveIngresada.trim() === claveCorrecta.trim()) {
+  if (claveIngresada?.trim() === claveCorrecta) {
     openModal(row);
   } else {
     alert('❌ Clave incorrecta. No podés acceder al entrenamiento.');
@@ -185,3 +181,4 @@ function cargarSonidoRegistro() {
   sonidoRegistro = new Audio('https://cdn.pixabay.com/download/audio/2022/03/15/audio_51f94bfa5a.mp3');
   sonidoRegistro.load();
 }
+
