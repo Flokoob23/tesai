@@ -226,3 +226,8 @@ button:active {
   to { transform: rotate(360deg); }
 }
 
+/* Oculto */
+.hidden {
+  display: none !important;
+}
+
