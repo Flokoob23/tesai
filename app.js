@@ -82,7 +82,7 @@ function openModal(row) {
       <p><strong>ACTIVIDAD DEL DIA:</strong> ${fecha}</p>
       <ul>${ejerciciosHtml}</ul>
 
-      <a href="https://api.whatsapp.com/send?phone=543584328924&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + nombre)}" target="_blank">
+      <a href="https://api.whatsapp.com/send?phone=543584605402&text=${encodeURIComponent('Hola Coach, tengo dudas con el entrenamiento de hoy (' + fecha + '). Mi nombre es ' + nombre)}" target="_blank">
         <button style="background-color: #FFA500; color: white; margin-top: 1rem;">Contactar por WhatsApp</button>
       </a>
 
